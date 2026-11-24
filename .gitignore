@@ -1,0 +1,15 @@
+# Local harness installs / test scratch (keep repo clean for skills.sh & plugin installers)
+.agents/
+.claude/
+.cursor/
+.aider-desk/
+skills-lock.json
+
+# Runtime state & worktrees
+.agent-state/
+.worktrees/
+
+# OS & editor junk
+.DS_Store
+Thumbs.db
+*.swp
