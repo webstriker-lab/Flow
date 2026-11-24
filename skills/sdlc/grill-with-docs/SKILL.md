@@ -24,9 +24,10 @@ Walk the design tree in rounds per `grilling`:
 - **Resolve every decision the autonomous executor would otherwise stall on:**
   - Scope, non-goals, and concrete acceptance / finish criteria (including UI flows to verify with `verify-<app>` or `browser-verify`).
   - Domain terms (update `GLOSSARY.md` inline) and architectural decisions / module seams (record load-bearing decisions in `docs/adr/`).
+  - **UI & Visual Direction (whenever the change touches user-facing UI):** Do not leave layout, density, visual hierarchy, or interaction feel unasked. Grill the user on visual feel, primary user actions, layout constraints, and existing design system/references—and for any non-trivial UI surface, offer to invoke the `prototype` skill right inside Gate 1 to spin up **3 structurally different throwaway variants** (in-app `?variant=` switcher for existing apps, or a standalone HTML file for greenfield) so the user can react to real pixels before autonomous coding begins.
   - Track slug `<track>` (short kebab-case name used for `.agent-state/<track>/STATE.md`, the spec, and the plan).
   - Execution preference if non-default (default: `subagent-driven-development` when subagents are available, otherwise `executing-plans`; or `/overnight` if the user plans to walk away).
-- **Do not write production code** until the frontier is empty and the user confirms shared understanding.
+- **Do not write production code** until the frontier is empty (including any UI prototype pick) and the user confirms shared understanding.
 
 ## Step 3: Write the Spec & Initialize State (Gate 1 Exit)
 
@@ -36,6 +37,7 @@ Once the user confirms shared understanding:
    - **Goal & Non-Goals**
    - **Domain Terms & ADRs Referenced**
    - **Module & Seam Design** (using `codebase-design` vocabulary)
+   - **UI & Visual Decisions** (if UI-facing: chosen layout/hierarchy/interactions from grilling or the winning `prototype` variant)
    - **Global Constraints** (exact values, invariants, compatibility rules)
    - **Acceptance & Verification Criteria** (unit tests + live app/UI verification proof)
 2. Ensure `.agent-state/` is gitignored, then create `.agent-state/<track>/STATE.md` with:

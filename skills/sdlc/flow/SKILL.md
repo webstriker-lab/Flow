@@ -13,7 +13,8 @@ Help the user pick the right Flow skill for their situation. Keep the answer sho
 
 | Situation | Skill | Notes |
 |-----------|-------|-------|
-| Starting a new feature, refactor, or design in a codebase | `/grill-with-docs` | Gate 1: grills every branch, updates `GLOSSARY.md`/ADRs, writes spec, then runs the autonomous pipeline to Gate 2. |
+| Starting a new feature, refactor, or design in a codebase | `/grill-with-docs` | Gate 1: grills every branch (including UI visual prototypes via `prototype`), updates `GLOSSARY.md`/ADRs, writes spec, then runs the autonomous pipeline to Gate 2. |
+| Exploring how a UI should look or whether a state model feels right | `prototype` | Builds 3 structurally different throwaway UI variants (with floating `?variant=` switcher or standalone greenfield HTML) or an interactive logic demo. |
 | Stress-testing a non-code idea, strategy, or doc | `/grill-me` | Relentless branching interview without touching code or repo docs. |
 | Picking up work after a rate limit or switching harnesses | `/resume <folder>` | Reads `.agent-state/<folder>/STATE.md` + git + plan and continues from the exact step. |
 | Capturing context from an unplanned exploratory chat | `/handoff` | Writes a manual checkpoint to `.agent-state/<folder>/HANDOFF.md`. |

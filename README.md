@@ -26,7 +26,7 @@ A personal, harness-agnostic **Two-Gate SDLC** skills repository combining the b
 
 ```mermaid
 flowchart TD
-    G1["Gate 1: /grill-with-docs<br/>(grilling + domain-modeling + codebase-design)"] --> Spec["Save Spec & Init .agent-state/&lt;track&gt;/STATE.md"]
+    G1["Gate 1: /grill-with-docs<br/>(grilling + domain-modeling + codebase-design + optional UI prototype)"] --> Spec["Save Spec & Init .agent-state/&lt;track&gt;/STATE.md"]
     Spec --> WT["using-git-worktrees"]
     WT --> Plan["writing-plans<br/>(proactive codebase-design)"]
     Plan --> Exec["subagent-driven-development / executing-plans<br/>(TDD + codebase-design + code-review + blast-radius)"]
@@ -144,19 +144,20 @@ A Markdown skill cannot override a harness's OS-level tool-approval prompts once
 
 ---
 
-## Skill Reference (31 Skills, 5 Categories)
+## Skill Reference (32 Skills, 5 Categories)
 
 Flow preserves Matt Pocock's clean **User-invoked** (`disable-model-invocation: true`, plus `agents/openai.yaml` for Codex) vs. **Model-invoked** (automatic or user-callable) split.
 
-### 1. [`skills/sdlc/`](./skills/sdlc/README.md) — Core Two-Gate Engineering Pipeline (16)
+### 1. [`skills/sdlc/`](./skills/sdlc/README.md) — Core Two-Gate Engineering Pipeline (17)
 
 | Skill | Invocation | Purpose |
 |-------|------------|---------|
 | [`using-flow`](./skills/sdlc/using-flow/SKILL.md) | Model | Session bootstrap: Two-Gate SDLC, continuous `STATE.md` checkpointing, mandatory skill discipline. |
 | [`flow`](./skills/sdlc/flow/SKILL.md) | User (`/flow`) | Smart router over all Flow skills. |
-| [`grill-with-docs`](./skills/sdlc/grill-with-docs/SKILL.md) | User (`/grill-with-docs`) | **Gate 1:** relentless design-tree interview + `GLOSSARY.md`/ADRs + deep seams → spec → autonomous handoff. |
+| [`grill-with-docs`](./skills/sdlc/grill-with-docs/SKILL.md) | User (`/grill-with-docs`) | **Gate 1:** relentless design-tree interview + `GLOSSARY.md`/ADRs + deep seams + optional UI `prototype` → spec → autonomous handoff. |
 | [`domain-modeling`](./skills/sdlc/domain-modeling/SKILL.md) | Model | Builds and sharpens `GLOSSARY.md` and `docs/adr/` inline. |
 | [`codebase-design`](./skills/sdlc/codebase-design/SKILL.md) | Model | Proactive architectural deepening & deep-module seams wired into planning, execution, and review. |
+| [`prototype`](./skills/sdlc/prototype/SKILL.md) | Model | Throwaway UI variants (3 structurally different layouts behind a floating `?variant=` switcher or standalone greenfield HTML) & logic demos during Gate 1. |
 | [`using-git-worktrees`](./skills/sdlc/using-git-worktrees/SKILL.md) | Model | Creates isolated feature worktree/branch and verifies clean test baseline. |
 | [`writing-plans`](./skills/sdlc/writing-plans/SKILL.md) | Model | Writes bite-sized TDD implementation plans (`docs/flow/plans/`) and hands off directly to execution. |
 | [`subagent-driven-development`](./skills/sdlc/subagent-driven-development/SKILL.md) | Model | Fresh implementer subagent + two-stage review per task, with final whole-branch review. |

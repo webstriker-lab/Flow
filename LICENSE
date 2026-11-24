@@ -28,7 +28,7 @@ Flow vendors, adapts, and composes skills from the following MIT-licensed projec
 
 - **Matt Pocock (`mattpocock/skills`)** — `grilling`, `grill-me`, `grill-with-docs`,
   `domain-modeling`, `codebase-design` (plus deepening heuristics from
-  `improve-codebase-architecture`), `pr` (originally credited to Dex Horthy / Humanlayer),
+  `improve-codebase-architecture`), `prototype`, `pr` (originally credited to Dex Horthy / Humanlayer),
   `retro`, `teach`, `writing-for-agents`, `handoff`, and `chief-of-staff` patterns
   adapted into `overnight`.
   https://github.com/mattpocock/skills

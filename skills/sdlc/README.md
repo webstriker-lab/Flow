@@ -10,6 +10,7 @@ Core Two-Gate engineering pipeline: Gate 1 alignment (`/grill-with-docs`) → au
 - [`using-flow`](./using-flow/SKILL.md) — Session bootstrap: Two-Gate contract and write-ahead `STATE.md` checkpointing.
 - [`domain-modeling`](./domain-modeling/SKILL.md) — Shared vocabulary, `GLOSSARY.md`, and ADR maintenance.
 - [`codebase-design`](./codebase-design/SKILL.md) — Deep-module vocabulary and proactive architectural deepening during development.
+- [`prototype`](./prototype/SKILL.md) — Throwaway UI variants (floating `?variant=` switcher or greenfield HTML) and logic demos during Gate 1 alignment.
 - [`using-git-worktrees`](./using-git-worktrees/SKILL.md) — Isolated feature worktree and clean test baseline.
 - [`writing-plans`](./writing-plans/SKILL.md) — Bite-sized TDD implementation plans (`docs/flow/plans/`).
 - [`subagent-driven-development`](./subagent-driven-development/SKILL.md) — Fresh subagent per task + two-stage review + whole-branch final review.
