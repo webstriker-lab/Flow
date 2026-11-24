@@ -27,6 +27,19 @@ Flow enforces **two human touchpoints** and an **autonomous middle**:
    - PR draft: `pr`
 3. **Gate 2 — Review before Push/Merge (`finishing-a-development-branch`):** Pause before any push, merge, or publish. Present the verified diff, evidence, PR draft, rulings made, and any out-of-scope architecture notes. After Gate 2, run `/retro` (and `/maintain-verification-skill` if the repo has a `verify-<app>` skill).
 
+## Greenfield vs. Brownfield Adaptation
+
+Detect the repository state at the start of work and apply the matching discipline automatically:
+
+- **Greenfield (0 commits or empty project scaffold):**
+  - Skip `using-git-worktrees` until an initial commit exists (`git worktree add` requires `HEAD`).
+  - Build a **Walking Skeleton** first: one thin vertical slice running end-to-end with lint, typecheck, and at least one real passing test—never over-scaffold unused folders or layers up front.
+  - Commit the Walking Skeleton, run `/create-verification-skill` once the app boots, then enter standard Two-Gate worktree cycles for every subsequent feature.
+- **Brownfield (existing / legacy codebase):**
+  - Record any pre-existing failing tests on the base branch in `STATE.md` under `Baseline Failures` so Gate 2 distinguishes pre-existing noise from new regressions.
+  - Run **targeted fast tests** per task during execution and the **full suite + `verify-<app>` / `browser-verify`** at Gate 2.
+  - Apply **Characterization Tests** (`test-driven-development`) before changing untested legacy code, and **Seam-Only Deepening + Chesterton's Fence** (`codebase-design`) so scoped tasks never turn into sprawling rewrites.
+
 ## Continuous Cross-Harness Checkpointing
 
 Rate limits can interrupt any harness without warning. Maintain a write-ahead state ledger at `.agent-state/<track>/STATE.md` (where `<track>` is the short kebab-case project/feature slug) on **every phase and task transition**—never wait for the user to ask for a handoff:

@@ -71,6 +71,11 @@ Apply this continuously across the SDLC without waiting to be asked:
 4. **During `requesting-code-review`:** Flag newly introduced shallow pass-throughs, leaky seams, or broken locality as **Important** findings.
 5. **Out-of-scope structural debt:** When you spot a larger codebase deepening opportunity *outside* the current feature's scope, do **not** derail the task or interrupt the user mid-build—record it under `Architecture Notes (Out-of-Scope)` in `.agent-state/<track>/STATE.md` (files, friction, proposed deepened seam, leverage/locality gain) so it appears cleanly at Gate 2 and `/retro`.
 
+### Brownfield Guardrails (Seam-Only & Chesterton's Fence)
+In existing or legacy codebases, autonomous deepening must stay surgical:
+- **Chesterton's Fence:** Before deleting, simplifying, or rewriting non-obvious existing code, guards, or workarounds, inspect `git log -S` / `git blame` to learn *why* that code exists. Never strip out a past incident fix by accident.
+- **Seam-Only Deepening:** Respect prevailing repo conventions in untouched files. Deepen *only* the exact seam your task modifies, and pin existing untested legacy behavior with **characterization tests** (`test-driven-development`) before refactoring. Log wider legacy messes to `Architecture Notes` rather than turning a scoped task into a sprawling rewrite.
+
 ## Designing for Testability
 
 1. **Accept dependencies, don't instantiate hidden ones.** Pass adapters at the seam.

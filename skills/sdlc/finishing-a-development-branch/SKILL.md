@@ -13,13 +13,14 @@ This is **Gate 2** of Flow — the final human review checkpoint before any push
 
 **Announce at start:** "I'm using the finishing-a-development-branch skill to prepare Gate 2 review."
 
-## Step 1: Verify Tests & App Behavior (`verification-before-completion`)
+## Step 1: Verify Tests, Diff Hygiene & App Behavior (`verification-before-completion`)
 
 Invoke `verification-before-completion`:
-1. Run the project's full test suite (`npm test` / `cargo test` / `pytest` / `go test ./...`) plus lint/typecheck if configured.
+1. Run the project's full test suite (`npm test` / `cargo test` / `pytest` / `go test ./...`) plus lint/typecheck if configured. On brownfield repos with documented `Baseline Failures` in `STATE.md`, verify **zero new failures** and report any pre-existing baseline failures transparently.
 2. If the repository has a project-local verification skill (`.agents/skills/verify-*/`), run it against the changed features.
 3. If the change touches user-facing UI and no `verify-<app>` exists, run `browser-verify` to verify the live UI flow, zero console/network errors, and capture screenshot proof.
 4. If the change alters risky shared seams or contracts, ensure `blast-radius` has proven downstream safety.
+5. Quick **diff-hygiene scan** (`git diff <base>..HEAD`): strip stray debug logs, narrating comments, and dead helpers before presenting Gate 2.
 
 **If any verification fails**, fix it before presenting Gate 2 — the menu comes only after green, fresh evidence:
 

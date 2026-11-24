@@ -13,9 +13,17 @@ Ensure work happens in an isolated workspace. Prefer your platform's native work
 
 **Announce at start:** "I'm using the using-git-worktrees skill to set up an isolated workspace."
 
-## Step 0: Detect Existing Isolation
+## Step 0: Detect Greenfield & Existing Isolation
 
-**Before creating anything, check if you are already in an isolated workspace.**
+**First, check for a 0-commit greenfield repository:**
+
+```bash
+git rev-parse --verify HEAD 2>/dev/null
+```
+
+If `HEAD` does not exist yet (0 commits), `git worktree add` cannot run. Work directly on the initial branch to land the **Walking Skeleton** commit first, then create worktrees for subsequent tracks. Skip to Step 2.
+
+**Next, check if you are already in an isolated workspace:**
 
 ```bash
 GIT_DIR=$(cd "$(git rev-parse --git-dir)" 2>/dev/null && pwd -P)
@@ -37,12 +45,8 @@ Report with branch state:
 - Detached HEAD: "Already in isolated workspace at `<path>` (detached HEAD, externally managed). Branch creation needed at finish time."
 
 **If `GIT_DIR == GIT_COMMON` (or in a submodule):** You are in a normal repo checkout.
-
-Has the user already indicated their worktree preference in your instructions? If not, ask for consent before creating a worktree:
-
-> "Would you like me to set up an isolated worktree? It protects your current branch from changes."
-
-Honor any existing declared preference without asking. If the user declines consent, work in place and skip to Step 2.
+- If Flow's Gate 1 (`/grill-with-docs`) already authorized autonomous execution, proceed directly to Step 1 without pausing to ask for consent.
+- Only ask for worktree consent if invoked standalone outside a confirmed Gate 1 flow.
 
 ## Step 1: Create Isolated Workspace
 
@@ -120,16 +124,16 @@ if [ -f go.mod ]; then go mod download; fi
 
 ## Step 3: Verify Clean Baseline
 
-Run tests to ensure workspace starts clean:
+Run tests to establish the starting baseline (on huge brownfield repos with slow full suites, run the targeted test suite covering the affected subsystem plus a fast typecheck/build):
 
 ```bash
 # Use project-appropriate command
 npm test / cargo test / pytest / go test ./...
 ```
 
-**If tests fail:** Report failures, ask whether to proceed or investigate.
-
-**If tests pass:** Report ready.
+- **If all tests pass:** Report ready.
+- **If the build/compile is broken or tests fail inside the exact subsystem you are about to modify:** Stop and fix or report before writing feature code.
+- **If unrelated pre-existing brownfield tests fail:** Record their exact names under `## Baseline Failures` in `.agent-state/<track>/STATE.md` (with commit SHA) and proceed—Gate 2 will verify **zero new failures** while surfacing the pre-existing baseline transparently.
 
 ### Report
 

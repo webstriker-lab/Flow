@@ -44,6 +44,13 @@ Write code before the test? Delete it. Start over.
 
 Implement fresh from tests. Period.
 
+### Brownfield Exception: Characterization Tests First
+
+When modifying or deepening **untested legacy code** in a brownfield repo, you cannot change behavior safely until current behavior is pinned:
+1. Write **characterization tests** that assert the legacy module's *current* observable behavior as-is (quirks included) through its public seam.
+2. Run them and verify they pass (**GREEN**) — proving your safety net captures reality.
+3. Commit the characterization tests, then switch to normal **RED-GREEN-REFACTOR** for every new behavior change or bug fix.
+
 ## Red-Green-Refactor
 
 ```dot

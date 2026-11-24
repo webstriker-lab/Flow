@@ -19,6 +19,10 @@ Write implementation plans for an engineer who has not seen this codebase or thi
 
 If the spec covers multiple independent subsystems that should have been separate tracks, split into separate plans—one per subsystem—so each produces working, testable software on its own.
 
+## Verify APIs Against Primary Sources (Anti-Hallucination)
+
+Before pinning signatures, config flags, or imports for unfamiliar or fast-moving libraries/SDKs into the plan, verify them directly against **installed source/types** (`node_modules/`, `.venv/`, vendor dirs, lockfile versions) or current official documentation. Never write plan steps from memory for version-sensitive APIs.
+
 ## File Structure & Proactive Architecture (`codebase-design`)
 
 Before defining tasks, apply `codebase-design` to map every file being created or modified:

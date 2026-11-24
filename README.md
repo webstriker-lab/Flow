@@ -40,6 +40,15 @@ flowchart TD
 
 ---
 
+## Greenfield vs. Brownfield
+
+Flow adapts automatically to where the repository is in its lifecycle:
+
+- **Greenfield (0 commits / new repo):** Skips worktrees until an initial commit exists, builds a thin **Walking Skeleton** running end-to-end (with lint, typecheck, and 1 real test), commits it, runs `/create-verification-skill` once the app boots, then enters standard Two-Gate worktree cycles.
+- **Brownfield (existing / legacy repo):** Snapshots any pre-existing failing tests on the base branch into `STATE.md` (so Gate 2 blocks only on *new* regressions), pins untested legacy modules with **characterization tests** before changing them, checks `git log` / `git blame` before deleting non-obvious code (**Chesterton's Fence**), and bounds proactive deepening strictly to touched seams.
+
+---
+
 ## Effort Level Guide ("The Price of Rigor")
 
 Flow defaults to **High / xHigh reasoning effort** across grilling, planning, coding, debugging, verification, and review.

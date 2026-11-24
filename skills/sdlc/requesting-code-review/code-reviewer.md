@@ -77,9 +77,19 @@ Subagent (general-purpose):
     **Architecture & Deep Modules (`codebase-design`):**
     - Sound design decisions and ADR compliance (`docs/adr/`)?
     - Deep modules with small interfaces and clean seams (flag shallow pass-through wrappers that fail the deletion test, leaky seams, or broken locality as Important)?
-    - Reasonable scalability and performance?
-    - Security concerns and downstream blast radius?
+    - Chesterton's Fence respected on brownfield edits (no unexplained deletion of legacy guards)?
+    - Reasonable scalability, performance, and downstream blast radius?
     - Integrates cleanly with surrounding code and `GLOSSARY.md` terms?
+
+    **Security & Boundaries:**
+    - Auth, authorization, and tenant/ownership checks enforced on every protected path (no IDOR)?
+    - External inputs validated/sanitized at system boundaries (CLI, HTTP, DB, webhooks — no injection, SSRF, XSS, or path traversal)?
+    - Zero secrets, tokens, or sensitive PII hardcoded, committed, or leaked in logs/errors?
+
+    **Diff Hygiene (Anti-Slop):**
+    - No narrating or obvious comments (`// fetch user`), stray debug logs, dead imports, or orphaned helpers left from earlier iterations?
+    - No swallowed errors (`catch {}`) hiding real failures?
+    - No unrequested drive-by edits outside the task's scope?
 
     **Testing:**
     - Tests verify real behavior, not mocks?
